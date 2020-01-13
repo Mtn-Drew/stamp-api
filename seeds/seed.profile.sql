@@ -1,0 +1,14 @@
+BEGIN;
+
+INSERT INTO profiles (id,title, template_id)
+VALUES 
+('520f7c5b-fba3-4d25-bc22-b8ae8fc9c475','CONVERSATION','c61b0b77-ecba-4f6b-b5e8-0b6b373809c2'),
+('a7184ed8-3208-43e2-b59e-43a01ea112e8','CASE NOTES','c61b0b77-ecba-4f6b-b5e8-0b6b373809c2'),
+('a30d2c25-3cf7-4806-9ed4-99506b64f06e','MISC','c61b0b77-ecba-4f6b-b5e8-0b6b373809c2'),
+('d2e9d8e0-1f3a-4f33-8001-5b51759154c9','EMAIL','c61b0b77-ecba-4f6b-b5e8-0b6b373809c2'),
+('d5430792-4e94-4888-af14-649680cd3993','IMS','ea460442-a4b2-45f3-9317-1ec76f12cef2'),
+('798de3e7-4640-4a4b-9274-42253292ae55','EMAIL','ea460442-a4b2-45f3-9317-1ec76f12cef2'),
+('5e54eead-d813-4ff0-80f5-18dec32bd698','TEXT','ea460442-a4b2-45f3-9317-1ec76f12cef2');
+
+
+COMMIT;

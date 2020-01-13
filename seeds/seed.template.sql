@@ -1,0 +1,11 @@
+BEGIN;
+
+TRUNCATE templates RESTART IDENTITY CASCADE;
+
+INSERT INTO templates (id,title, owner_id)
+VALUES 
+('c61b0b77-ecba-4f6b-b5e8-0b6b373809c2', 'WORK', '7e116f8f-e326-4727-83a7-59e2b626711f'),
+('ea460442-a4b2-45f3-9317-1ec76f12cef2', 'PERSONAL','7e116f8f-e326-4727-83a7-59e2b626711f');
+
+
+COMMIT;
