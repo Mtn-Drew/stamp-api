@@ -6,5 +6,6 @@ CREATE TABLE users (
   user_name TEXT NOT NULL,
   PRIMARY KEY (id),
   email TEXT NOT NULL,
+  date_created DATE,
   password text NOT NULL
 )
