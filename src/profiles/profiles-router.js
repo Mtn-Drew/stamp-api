@@ -7,13 +7,19 @@ const jsonParser = express.json()
 
 const sanatizeProfile = (profile) => ({
   id: profile.id,
-  content: xss(profile.content),
-  name: xss(profile.name),
-  modified: profile.modified,
-  folder_id: profile.folder_id
+  title: xss(profile.title),
+  template_id: profile.template_id
 })
 
-
+profilesRouter 
+  .route('/')
+  .get((req, res, next) => {
+    ProfilesService.getAllProfiles(req.app.get('db'))
+    .then((profile)=> {
+      res.json(profile.map(sanatizeProfile))
+    })
+    .catch(next)
+  }) 
 
 
 

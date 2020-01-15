@@ -2,15 +2,13 @@ const express = require('express')
 const path = require('path')
 const xss = require('xss')
 const TemplatesService = require('./templates-service')
-
 const templatesRouter = express.Router()
 const jsonParser = express.json()
 
 const sanatizeTemplate = (template) => ({
   id: template.id,
-  title : xxs(template.title),
-  owner: template.owner,
-  editable: template.editable
+  title : xss(template.title),
+  owner: template.owner_id,    
 })
 
 
@@ -19,12 +17,12 @@ templatesRouter
   .get((req, res, next) => {
     TemplatesService.getAllTemplates(req.app.get('db'))
     .then((template)=> {
-      res.json(templates.map(sanatizeTemplate))
+      res.json(template.map(sanatizeTemplate))
     })
     .catch(next)
   }) 
 
-  .post
+  // .post
 
   templatesRouter 
     .route('/:template_id')

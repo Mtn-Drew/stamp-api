@@ -8,14 +8,22 @@ const jsonParser = express.json()
 const sanatizeStamp = (stamp) => ({
   id: stamp.id,
   content: xss(stamp.content),
-  name: xss(stamp.name),
-  modified: stamp.modified,
-  folder_id: stamp.folder_id
+  title: xss(stamp.title),
+  template_id: stamp.template_id,
+  profile_id: stamp.profile_id
 })
 
 
 
-
+stampsRouter 
+  .route('/')
+  .get((req, res, next) => {
+    StampsService.getAllStamps(req.app.get('db'))
+    .then((stamp)=> {
+      res.json(stamp.map(sanatizeStamp))
+    })
+    .catch(next)
+  }) 
 
 
 
