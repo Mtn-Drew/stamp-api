@@ -10,7 +10,7 @@ const ProfilesService = {
   getById(knex, id) {
     return knex
     .select('*')
-    .from('notes')
+    .from('profiles')
     .where('id', id)
     .first()
   },
@@ -20,7 +20,7 @@ const ProfilesService = {
       .delete()
   },
   updateProfile(knex, id, newProfile) {
-    return knex('notes')
+    return knex('profiles')
       .where({ id })
       .update(newProfile)
   }

@@ -10,15 +10,17 @@ const TemplatesService = {
   getById(knex, id) {
     return knex
     .select('*')
-    .from('notes')
+    .from('templates')
     .where('id', id)
     .first()
   },
+
   deleteTemplate(knex,id) {
     return knex('templates')
       .where({ id })
       .delete()
   },
+  
   updateTemplate(knex, id, newTemplate) {
     return knex('templates')
       .where({ id })
