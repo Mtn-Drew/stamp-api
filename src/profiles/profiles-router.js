@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const xss = require('xss')
 const ProfilesService = require('./profiles-service')
+const {requireAuth} = require('../middleware/jwt-auth.js')
 
 const profilesRouter = express.Router()
 const jsonParser = express.json()
@@ -13,7 +14,9 @@ const sanatizeProfile = (profile) => ({
 })
 
 profilesRouter 
+// .use(requireAuth)
   .route('/')
+  
   .get((req, res, next) => {
     ProfilesService.getAllProfiles(req.app.get('db'))
     .then((profile)=> {
@@ -45,7 +48,7 @@ profilesRouter
 
 profilesRouter
   .route('/:profile_id')
-  // .all(requireAuth)
+   .all(requireAuth)
   .all(checkProfileExists)
   .get((req, res, next) => {
     res.json(sanatizeProfile(res.profile))

@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const xss = require('xss')
 const TemplatesService = require('./templates-service')
+const {requireAuth} = require('../middleware/jwt-auth.js')
 
 const templatesRouter = express.Router()
 const jsonParser = express.json()
@@ -13,7 +14,9 @@ const sanatizeTemplate = (template) => ({
 })
 
 templatesRouter
+// .use(requireAuth)
   .route('/')
+  
   .get((req, res, next) => {
   TemplatesService.getAllTemplates(req.app.get('db'))
     .then((template) => {
@@ -44,6 +47,7 @@ templatesRouter
 })
 
 templatesRouter
+  .use(requireAuth)
   .route('/:template_id')
   // .all(requireAuth)
   .all(checkTemplateExists)

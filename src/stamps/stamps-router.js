@@ -4,6 +4,7 @@ const xss = require('xss')
 const StampsService = require('./stamps-service')
 const stampsRouter = express.Router()
 const jsonParser = express.json()
+const {requireAuth} = require('../middleware/jwt-auth.js')
 
 const sanatizeStamp = (stamp) => ({
   id: stamp.id,
@@ -16,6 +17,7 @@ const sanatizeStamp = (stamp) => ({
 
 
 stampsRouter 
+// .use(requireAuth)
   .route('/')
   .get((req, res, next) => {
     StampsService.getAllStamps(req.app.get('db'))
