@@ -1,10 +1,10 @@
 const TemplatesService = {
-  getAllTemplates(knex){
-    return knex.select('*').from('templates')
+  getAllTemplates(knex, userid){
+    return knex.select('*').from('templates').where('owner_id', userid)
   },
 
   insertTemplate(knex, newTemplate) {
-    return knex.insert(newTemplate)
+    return knex('templates').insert(newTemplate)
   },
 
   getById(knex, id) {

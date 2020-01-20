@@ -18,7 +18,7 @@ templatesRouter
   .route('/')
 //filter by owner id ++++++++++++++++++++++++++++++++++++++++++
   .get((req, res, next) => {
-    TemplatesService.getAllTemplates(req.app.get('db'))
+    TemplatesService.getAllTemplates(req.app.get('db'),req.user.id)
       .then((template) => {
         res.json(template.map(sanatizeTemplate))
       })

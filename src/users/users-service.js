@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
 const xss = require('xss')
+const defaultLoad = require('./defaultLoad')
 
 const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
 
@@ -43,6 +44,15 @@ const UsersService = {
       date_created: new Date(user.date_created),
     }
   },
+  defaultPopulate(db, user){
+    return defaultLoad.template.map(template => {
+      console.log(template, user.id);
+      return db('templates').insert({
+        ...template, 
+        owner_id: user.id
+      })
+    })
+  }
 }
  
 module.exports = UsersService
