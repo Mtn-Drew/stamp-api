@@ -14,9 +14,9 @@ const sanatizeTemplate = (template) => ({
 })
 
 templatesRouter
-  // .use(requireAuth)
+   .use(requireAuth)
   .route('/')
-
+//filter by owner id ++++++++++++++++++++++++++++++++++++++++++
   .get((req, res, next) => {
     TemplatesService.getAllTemplates(req.app.get('db'))
       .then((template) => {
@@ -24,10 +24,10 @@ templatesRouter
       })
       .catch(next)
   })
-  .post(jsonParser,(req, res, next) => {
+  .post(jsonParser, (req, res, next) => {
     console.log(req.body)
-    const { id, title, owner_id } = req.body
-    const newTemplate = { id, title, owner_id }
+    const { title, owner_id } = req.body
+    const newTemplate = { title, owner_id }
     console.log(newTemplate)
 
     for (const [key, value] of Object.entries(newTemplate)) {
@@ -37,7 +37,6 @@ templatesRouter
         })
       }
     }
-    
 
     TemplatesService.insertTemplate(req.app.get('db'), newTemplate)
       .then((template) => {
@@ -45,10 +44,8 @@ templatesRouter
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${template.id}`))
           .json(sanatizeTemplate(template))
-      }
-      )
+      })
       .catch(next)
-      
   })
 
 templatesRouter
@@ -57,6 +54,7 @@ templatesRouter
   // .all(requireAuth)
   .all(checkTemplateExists)
   .get((req, res, next) => {
+    
     res.json(sanatizeTemplate(res.template))
   })
   .delete((req, res, next) => {

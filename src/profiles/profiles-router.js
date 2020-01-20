@@ -14,7 +14,7 @@ const sanatizeProfile = (profile) => ({
 })
 
 profilesRouter 
-// .use(requireAuth)
+ .use(requireAuth)
   .route('/')
   
   .get((req, res, next) => {

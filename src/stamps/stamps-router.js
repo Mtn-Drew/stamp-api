@@ -17,7 +17,7 @@ const sanatizeStamp = (stamp) => ({
 
 
 stampsRouter 
-// .use(requireAuth)
+ .use(requireAuth)
   .route('/')
   .get((req, res, next) => {
     StampsService.getAllStamps(req.app.get('db'))
