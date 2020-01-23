@@ -52,6 +52,40 @@ stampsRouter
     .catch(next)
 })
 
+stampsRouter
+   .use(requireAuth)
+  .route('/:stamp_id')
+  // .all(requireAuth)
+  .all(checkStampExists)
+  .get((req, res, next) => {
+    
+    res.json(sanatizeStamp(res.stamp))
+  })
+  .delete((req, res, next) => {
+    StampsService.deleteStamp(req.app.get('db'), req.params.stamp_id)
+      .then(() => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
 
+  async function checkStampExists(req, res, next) {
+    try { 
+      const stamp = await StampsService.getById(
+        req.app.get('db'),
+        req.params.stamp_id
+      )
+  
+      if (!stamp)
+        return res.status(404).json({
+          error: `Stamp doesn't exist`
+        })
+  
+      res.stamp = stamp
+      next()
+    } catch (error) {
+      next(error)
+    }
+  }
 
 module.exports = stampsRouter
