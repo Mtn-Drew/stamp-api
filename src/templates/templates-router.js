@@ -10,14 +10,18 @@ const jsonParser = express.json()
 const sanatizeTemplate = (template) => ({
   id: template.id,
   title: xss(template.title),
-  owner: template.owner_id
+  owner: template.owner_id,
+  archived: template.archived,
+  write: template.write,
+
 })
 
 templatesRouter
-   .use(requireAuth)
+  .use(requireAuth)
   .route('/')
 //filter by owner id ++++++++++++++++++++++++++++++++++++++++++
   .get((req, res, next) => {
+    console.log('templateRouther', req.user.id);
     TemplatesService.getAllTemplates(req.app.get('db'),req.user.id)
       .then((template) => {
         res.json(template.map(sanatizeTemplate))
@@ -25,10 +29,10 @@ templatesRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    console.log(req.body)
+    console.log('post', req.body)
     const { title, owner_id } = req.body
-    const newTemplate = { title, owner_id }
-    console.log(newTemplate)
+    const newTemplate = { title, owner_id:req.user.id }
+    console.log('newTemplate', newTemplate)
 
     for (const [key, value] of Object.entries(newTemplate)) {
       if (value == null) {
@@ -49,7 +53,7 @@ templatesRouter
   })
 
 templatesRouter
-  // .use(requireAuth)
+   .use(requireAuth)
   .route('/:template_id')
   // .all(requireAuth)
   .all(checkTemplateExists)
@@ -90,7 +94,7 @@ templatesRouter
   })
 
 async function checkTemplateExists(req, res, next) {
-  try {
+  try { 
     const template = await TemplatesService.getById(
       req.app.get('db'),
       req.params.template_id

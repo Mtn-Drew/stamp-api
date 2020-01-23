@@ -1,3 +1,0 @@
-ALTER TABLE users DROP COLUMN IF EXISTS standing;
-
-DROP TYPE IF EXISTS active_status;

@@ -10,7 +10,10 @@ const jsonParser = express.json()
 const sanatizeProfile = (profile) => ({
   id: profile.id,
   title: xss(profile.title),
-  template_id: profile.template_id
+  template_id: profile.template_id,
+  owner_id: profile.owner_id,
+  archived: profile.archived,
+  write: profile.write,
 })
 
 profilesRouter 
@@ -18,15 +21,15 @@ profilesRouter
   .route('/')
   
   .get((req, res, next) => {
-    ProfilesService.getAllProfiles(req.app.get('db'))
+    ProfilesService.getAllProfiles(req.app.get('db'),req.user.id)
     .then((profile)=> {
       res.json(profile.map(sanatizeProfile))
     })
     .catch(next)
   }) 
   .post(jsonParser, (req, res, next) => {
-    const { title, template_id } = req.body
-    const newProfile = { title, template_id }
+    const { title, template_id, owner_id } = req.body
+    const newProfile = { title, template_id, owner_id }
   
     for (const [key, value] of Object.entries(newProfile)) {
       if (value == null) {

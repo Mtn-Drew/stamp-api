@@ -1,10 +1,10 @@
 const ProfilesService = {
-  getAllProfiles(knex){
-    return knex.select('*').from('profiles')
+  getAllProfiles(knex, userid){
+    return knex.select('*').from('profiles').where('owner_id', userid)
   },
 
   insertProfile(knex, newProfile) {
-    return knex.insert(newProfile)
+    return knex('profiles').insert(newProfile)
   },
 
   getById(knex, id) {

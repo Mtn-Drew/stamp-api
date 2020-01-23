@@ -1,10 +1,10 @@
 const StampsService = {
-  getAllStamps(knex){
-    return knex.select('*').from('stamps')
+  getAllStamps(knex, userid){
+    return knex.select('*').from('stamps').where('owner_id', userid)
   },
 
   insertStamp(knex, newStamp) {
-    return knex.insert(newStamp)
+    return knex('stamps').insert(newStamp)
   },
 
   getById(knex, id) {
