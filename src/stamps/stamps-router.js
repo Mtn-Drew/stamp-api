@@ -69,6 +69,29 @@ stampsRouter
       .catch(next)
   })
 
+  .patch(jsonParser, (req, res, next) => {
+    const { title, profile_id, content } = req.body
+    const stampToUpdate = { title, profile_id, content }
+    const numberOfValues = Object.values(stampToUpdate).filter(Boolean)
+      .length
+    if (numberOfValues === 0) {
+      return res.status(400).json({
+        error: {
+          message: `Request body must contain 'title'`
+        }
+      })
+    }
+    StampsService.updateStamp(
+      req.app.get('db'),
+      req.params.stamp_id,
+      stampToUpdate 
+    )
+      .then((numRowsAffected) => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
+
   async function checkStampExists(req, res, next) {
     try { 
       const stamp = await StampsService.getById(

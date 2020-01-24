@@ -85,7 +85,7 @@ templatesRouter
     TemplatesService.updateTemplate(
       req.app.get('db'),
       req.params.template_id,
-      templateToUpdate
+      templateToUpdate 
     )
       .then((numRowsAffected) => {
         res.status(204).end()
