@@ -6,5 +6,6 @@ CREATE TABLE templates (
   PRIMARY KEY (id),
   owner_id uuid REFERENCES users(id) ON DELETE CASCADE NOT NULL,
   archived TEXT,
-  WRITE TEXT
+  WRITE TEXT,
+  disp_ord SERIAL
 )

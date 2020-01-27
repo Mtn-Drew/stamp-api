@@ -7,5 +7,6 @@ CREATE TABLE profiles (
   template_id uuid REFERENCES templates(id) ON DELETE CASCADE NOT NULL,
   owner_id uuid REFERENCES users(id) ON DELETE CASCADE NOT NULL,
   write TEXT,
-  archived TEXT
+  archived TEXT,
+  disp_ord SERIAL
 )

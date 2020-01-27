@@ -13,8 +13,9 @@ const sanatizeStamp = (stamp) => ({
   template_id: stamp.template_id,
   profile_id: stamp.profile_id,
   owner_id: stamp.owner_id,
-  archive: stamp.archive,
-  write: stamp.write
+  archived: stamp.archive,
+  write: stamp.write,
+  disp_ord: stamp.disp_ord
 })
 
 stampsRouter

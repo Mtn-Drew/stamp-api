@@ -13,16 +13,16 @@ const sanatizeTemplate = (template) => ({
   owner: template.owner_id,
   archived: template.archived,
   write: template.write,
-
+  disp_ord: template.disp_ord
 })
 
 templatesRouter
   .use(requireAuth)
   .route('/')
-//filter by owner id ++++++++++++++++++++++++++++++++++++++++++
+  //filter by owner id ++++++++++++++++++++++++++++++++++++++++++
   .get((req, res, next) => {
-    console.log('templateRouther', req.user.id);
-    TemplatesService.getAllTemplates(req.app.get('db'),req.user.id)
+    console.log('templateRouter', req.user.id)
+    TemplatesService.getAllTemplates(req.app.get('db'), req.user.id)
       .then((template) => {
         res.json(template.map(sanatizeTemplate))
       })
@@ -31,7 +31,7 @@ templatesRouter
   .post(jsonParser, (req, res, next) => {
     console.log('post', req.body)
     const { title, owner_id } = req.body
-    const newTemplate = { title, owner_id:req.user.id }
+    const newTemplate = { title, owner_id: req.user.id }
     console.log('newTemplate', newTemplate)
 
     for (const [key, value] of Object.entries(newTemplate)) {
@@ -53,12 +53,11 @@ templatesRouter
   })
 
 templatesRouter
-   .use(requireAuth)
+  .use(requireAuth)
   .route('/:template_id')
   // .all(requireAuth)
   .all(checkTemplateExists)
   .get((req, res, next) => {
-    
     res.json(sanatizeTemplate(res.template))
   })
   .delete((req, res, next) => {
@@ -85,7 +84,7 @@ templatesRouter
     TemplatesService.updateTemplate(
       req.app.get('db'),
       req.params.template_id,
-      templateToUpdate 
+      templateToUpdate
     )
       .then((numRowsAffected) => {
         res.status(204).end()
@@ -94,7 +93,7 @@ templatesRouter
   })
 
 async function checkTemplateExists(req, res, next) {
-  try { 
+  try {
     const template = await TemplatesService.getById(
       req.app.get('db'),
       req.params.template_id

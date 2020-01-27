@@ -48,15 +48,24 @@ const UsersService = {
       date_created: new Date(user.date_created),
     }
   },
-  defaultPopulate(db, user){
+  defaultPopulateTemplate(db, user){
     return defaultLoad.template.map(template => {
       console.log(template, user.id);
       return db('templates').insert({
         ...template, 
-        owner_id: user.id
+        owner_id: user.id,
       })
     })
-  }
+  },
+  defaultPopulateProfile(db, user){
+    return defaultLoad.profile.map(profile => {
+      console.log(profile, user.id);
+      return db('profiles').insert({
+        ...profile, 
+        owner_id: user.id,
+      })
+    })
+  },
 }
  
 module.exports = UsersService

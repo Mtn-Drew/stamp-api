@@ -9,5 +9,6 @@ CREATE TABLE stamps (
   profile_id uuid REFERENCES profiles(id) ON DELETE CASCADE NOT NULL,
   owner_id uuid REFERENCES users(id) ON DELETE CASCADE NOT NULL,
   archived TEXT,
-  write TEXT
+  write TEXT,
+  disp_ord SERIAL
 )

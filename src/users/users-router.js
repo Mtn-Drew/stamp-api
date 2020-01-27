@@ -9,15 +9,7 @@ const jsonBodyParser = express.json()
 usersRouter
   // .use(requireAuth)
   .route('/')
-  //filter by owner id ++++++++++++++++++++++++++++++++++++++++++
-  // .get((req, res, next) => {
-  //   console.log('templateRouther', req.user.id)
-  //   UsersService.getAllUsers(req.app.get('db'), req.user.id)
-  //     .then((user) => {
-  //       res.json(user.map(serializeUser(user)))
-  //     })
-  //     .catch(next)
-  // })
+
   .post(jsonBodyParser, (req, res, next) => {
     const { password, user_name, email } = req.body
     console.log('userRouter /')
@@ -27,7 +19,6 @@ usersRouter
           error: `Missing '${field}' in request body`
         })
 
-    // TODO: check user_name doesn't start with spaces
 
     const passwordError = UsersService.validatePassword(password)
 
@@ -53,7 +44,7 @@ usersRouter
       })
       .then((u) => {
         user = u
-        const promises = UsersService.defaultPopulate(req.app.get('db'), user)
+        const promises = UsersService.defaultPopulateTemplate(req.app.get('db'), user)
         return Promise.all(promises)
       })
       .then(() => {
@@ -62,7 +53,17 @@ usersRouter
           .location(path.posix.join(req.originalUrl, `/${user.id}`))
           .json(UsersService.serializeUser(user))
       })
-
+      .then((u) => {
+        user = u
+        const promises = UsersService.defaultPopulateProfile(req.app.get('db'), user)
+        return Promise.all(promises)
+      })
+      .then(() => {
+        res
+          .status(201)
+          .location(path.posix.join(req.originalUrl, `/${user.id}`))
+          .json(UsersService.serializeUser(user))
+      })
       .catch(next)
   })
 

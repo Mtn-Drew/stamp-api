@@ -1,14 +1,12 @@
 const defaultLoad = {
   template: [
+    
     {
-      title: 'WORK',
-      
-    },
-    {
-      title: 'PERSONAL',
-      
+      title: 'MY FIRST TEMPLATE',
     }
-  ]
+  ],
+
+  
 }
 
 module.exports = defaultLoad
