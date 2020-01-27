@@ -7,7 +7,7 @@ const usersRouter = express.Router()
 const jsonBodyParser = express.json()
 
 usersRouter
-  // .use(requireAuth)
+   .use(requireAuth)
   .route('/')
 
   .post(jsonBodyParser, (req, res, next) => {

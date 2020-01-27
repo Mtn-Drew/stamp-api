@@ -15,7 +15,7 @@ function makeUsersArray() {
       id: '46100981-c7c3-41f7-9d6b-122ca9b71108',
       user_name: 'test-user-1',
       email: 'email@email.com',
-      password: 'password',
+      password: '11AAaa!!',
       date_created: new Date('2029-01-22T16:28:32.615Z')
     },
     {
@@ -126,7 +126,8 @@ function makeStampsArray(users, templates, profiles) {
     {
       id: '0f8c44ab-369d-4f1d-b8f9-5e38a6b50e42',
       title: 'Stamp 1',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
       profile_id: profiles[0].id,
       owner_id: users[0].id,
@@ -137,7 +138,8 @@ function makeStampsArray(users, templates, profiles) {
     {
       id: '0072a5de-4c20-45c5-bae4-179dca8a8930',
       title: 'Stamp 2',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
       profile_id: profiles[0].id,
       owner_id: users[0].id,
@@ -148,7 +150,8 @@ function makeStampsArray(users, templates, profiles) {
     {
       id: '',
       title: 'Stamp 3',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
       profile_id: profiles[1].id,
       owner_id: users[0].id,
@@ -159,7 +162,8 @@ function makeStampsArray(users, templates, profiles) {
     {
       id: '0072a5de-4c20-45c5-bae4-179dca8a8930',
       title: 'Stamp 4',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
       profile_id: profiles[1].id,
       owner_id: users[0].id,
@@ -170,7 +174,8 @@ function makeStampsArray(users, templates, profiles) {
     {
       id: '59b9b9ee-03cf-4d95-80e6-09f3c96c2c22',
       title: 'Stamp 5',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
       profile_id: profiles[2].id,
       owner_id: users[0].id,
@@ -181,7 +186,8 @@ function makeStampsArray(users, templates, profiles) {
     {
       id: 'd9b8b3c0-57ed-4407-949f-c4e1580cb3df',
       title: 'Stamp 6',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
       profile_id: profiles[2].id,
       owner_id: users[0].id,
@@ -192,7 +198,8 @@ function makeStampsArray(users, templates, profiles) {
     {
       id: 'ecb17cb1-9194-4304-8753-cad6de279039',
       title: 'Stamp 7',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
       profile_id: profiles[3].id,
       owner_id: users[0].id,
@@ -203,7 +210,8 @@ function makeStampsArray(users, templates, profiles) {
     {
       id: '83356bc8-9d17-4166-a819-77529b8eda73',
       title: 'Stamp 8',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
       profile_id: profiles[3].id,
       owner_id: users[0].id,
@@ -214,7 +222,8 @@ function makeStampsArray(users, templates, profiles) {
     {
       id: '19a13ca9-3e6a-4c4b-8037-2511e6c8d423',
       title: 'Stamp 9',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[2].id,
       profile_id: profiles[4].id,
       owner_id: users[1].id,
@@ -225,61 +234,71 @@ function makeStampsArray(users, templates, profiles) {
   ]
 }
 
-    function cleanTables(db) {
-      return db.transaction(trx =>
-        trx.raw(
-          `TRUNCATE
+function cleanTables(db) {
+  return db.transaction((trx) =>
+    trx.raw(
+      `TRUNCATE
           stamps,
           profiles,
           templates,
           users
           `
-        )
-      //   .then(() =>
-      // Promise.all([
-      //   trx.raw(`ALTER SEQUENCE blogful_articles_id_seq minvalue 0 START WITH 1`),
-      //   trx.raw(`ALTER SEQUENCE blogful_users_id_seq minvalue 0 START WITH 1`),
-      //   trx.raw(`ALTER SEQUENCE blogful_comments_id_seq minvalue 0 START WITH 1`),
-      //   trx.raw(`SELECT setval('blogful_articles_id_seq', 0)`),
-      //   trx.raw(`SELECT setval('blogful_users_id_seq', 0)`),
-      //   trx.raw(`SELECT setval('blogful_comments_id_seq', 0)`),
-      // ])
-      )
-    }
+    )
+  )
+}
 
-    function seedUsers(db, users) {
-      const preppedUsers = users.map(user => ({
-        ...user,
-        password: bcrypt.hashSync(user.password, 1)
-      }))
-      return db.into('users').insert(preppedUsers)
-        // .then(() =>
-        //   // update the auto sequence to stay in sync
-        //   db.raw(
-        //     `SELECT setval('blogful_users_id_seq', ?)`,
-        //     [users[users.length - 1].id],
-        //   )
-        // )
-    }
-    
+function seedUsers(db, users) {
+  const preppedUsers = users.map((user) => ({
+    ...user,
+    password: bcrypt.hashSync(user.password, 1)
+  }))
+  return db.into('users').insert(preppedUsers)
+}
 
+function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
+  const token = jwt.sign({ user_id: user.id }, secret, {
+    subject: user.user_name,
+    algorithm: 'HS256'
+  })
+  return `Bearer ${token}`
+}
 
+function seedTemplatesTables(db, users, templates) {
+  // use a transaction to group the queries and auto rollback on any failure
+  return db.transaction(async (trx) => {
+    await seedUsers(trx, users)
+    await trx.into('templates').insert(templates)
+    // update the auto sequence to match the forced id values
+  })
+}
 
+function seedProfilesTables(db, users, profiles) {
+  // use a transaction to group the queries and auto rollback on any failure
+  return db.transaction(async (trx) => {
+    await seedUsers(trx, users)
+    await trx.into('profiles').insert(profiles)
+    // update the auto sequence to match the forced id values
+  })
+}
 
+function seedStampsTables(db, users, stamps) {
+  // use a transaction to group the queries and auto rollback on any failure
+  return db.transaction(async (trx) => {
+    await seedUsers(trx, users)
+    await trx.into('stamps').insert(stamps)
+    // update the auto sequence to match the forced id values
+  })
+}
 
 module.exports = {
   makeUsersArray,
   makeProfilesArray,
   makeTemplatesArray,
-  // makeExpectedArticle,
-  // makeExpectedArticleComments,
-  // makeMaliciousArticle,
-  // makeCommentsArray,
-
+  seedTemplatesTables,
+  seedProfilesTables,
+  seedStampsTables,
   makeFixtures,
   cleanTables,
-  // seedArticlesTables,
-  // seedMaliciousArticle,
-  // makeAuthHeader,
-  seedUsers,
+  makeAuthHeader,
+  seedUsers
 }

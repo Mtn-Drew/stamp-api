@@ -53,7 +53,7 @@ stampsRouter
 stampsRouter
   .use(requireAuth)
   .route('/:stamp_id')
-  // .all(requireAuth)
+  .all(requireAuth)
   .all(checkStampExists)
   .get((req, res, next) => {
     res.json(sanatizeStamp(res.stamp))
@@ -83,7 +83,7 @@ stampsRouter
       stampToUpdate
     )
       .then((numRowsAffected) => {
-        res.status(204).end()
+        res.status(204).json({})
       })
       .catch(next)
   })

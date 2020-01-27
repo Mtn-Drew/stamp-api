@@ -55,7 +55,7 @@ templatesRouter
 templatesRouter
   .use(requireAuth)
   .route('/:template_id')
-  // .all(requireAuth)
+   .all(requireAuth)
   .all(checkTemplateExists)
   .get((req, res, next) => {
     res.json(sanatizeTemplate(res.template))

@@ -7,7 +7,7 @@ const { requireAuth } = require('../middleware/jwt-auth.js')
 const profilesRouter = express.Router()
 const jsonParser = express.json()
 
-const sanatizeProfile = (profile) => ({
+const sanitizeProfile = (profile) => ({
   id: profile.id,
   title: xss(profile.title),
   template_id: profile.template_id,
@@ -24,7 +24,7 @@ profilesRouter
   .get((req, res, next) => {
     ProfilesService.getAllProfiles(req.app.get('db'), req.user.id)
       .then((profile) => {
-        res.json(profile.map(sanatizeProfile))
+        res.json(profile.map(sanitizeProfile))
       })
       .catch(next)
   })
@@ -45,7 +45,7 @@ profilesRouter
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${profile.id}`))
-          .json(sanatizeProfile(profile))
+          .json(sanitizeProfile(profile))
       })
       .catch(next)
   })
@@ -55,7 +55,7 @@ profilesRouter
   .all(requireAuth)
   .all(checkProfileExists)
   .get((req, res, next) => {
-    res.json(sanatizeProfile(res.profile))
+    res.json(sanitizeProfile(res.profile))
   })
   .delete((req, res, next) => {
     ProfilesService.deleteProfile(req.app.get('db'), req.params.profile_id)
