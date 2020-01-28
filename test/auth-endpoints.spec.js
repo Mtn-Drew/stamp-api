@@ -8,6 +8,7 @@ describe('Auth Endpoints', function() {
 
   const { testUsers } = helpers.makeFixtures()
   const testUser = testUsers[0]
+  console.log('testUser', testUser);
 
   before('make knex instance', () => {
     db = knex({
@@ -68,19 +69,23 @@ describe('Auth Endpoints', function() {
     })
 
     it(`responds 200 and JWT auth token using secret when valid credentials`, () => {
+      console.log('secret->', process.env.JWT_SECRET)
       const userValidCreds = {
         user_name: testUser.user_name,
         password: testUser.password,
       }
+      console.log('userValidCreds', userValidCreds);
       const expectedToken = jwt.sign(
         { user_id: testUser.id },
         process.env.JWT_SECRET,
         {
           subject: testUser.user_name,
 
-          algorithm: 'HS256',
+           algorithm: 'HS256',
         }
+        
       )
+      console.log('expectedToken', expectedToken);
       return supertest(app)
         .post('/api/auth/login')
         .send(userValidCreds)

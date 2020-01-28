@@ -22,12 +22,13 @@ app.use(helmet())
 
 
 //validate bearer
-
+app.use('/api/auth', authRouter)
+app.use('/api/users', usersRouter)
 app.use('/api/templates', templatesRouter)
 app.use('/api/profiles', profilesRouter)
 app.use('/api/stamps', stampsRouter)
-app.use('/api/auth', authRouter)
-app.use('/api/users', usersRouter)
+
+
 
 app.get('/', (req, res) => {
   res.send('Hello, world!')

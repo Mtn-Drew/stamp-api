@@ -65,7 +65,7 @@ describe('Profiles Endpoints', function() {
         )
   
         it(`responds with 404`, () => {
-          const profileId = 123456
+          const profileId = '83897c95-df74-499b-8cc9-777ee8342d0c'
           return supertest(app)
             .get(`/api/profiles/${profileId}`)
             .set('Authorization', helpers.makeAuthHeader(testUsers[0]))

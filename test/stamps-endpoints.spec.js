@@ -65,7 +65,7 @@ describe('Stamps Endpoints', function() {
         )
   
         it(`responds with 404`, () => {
-          const stampId = 123456
+          const stampId = '83897c95-df74-499b-8cc9-777ee8342d0c'
           return supertest(app)
             .get(`/api/stamps/${stampId}`)
             .set('Authorization', helpers.makeAuthHeader(testUsers[0]))

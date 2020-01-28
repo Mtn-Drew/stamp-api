@@ -50,7 +50,7 @@ function makeTemplatesArray(users) {
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 1
     },
     {
       id: 'c0cc8ec3-8ae7-440e-80bc-e6f35235176c',
@@ -58,15 +58,15 @@ function makeTemplatesArray(users) {
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 2
     },
     {
       id: '14d17924-f028-4584-92bb-2691ef24580a',
       title: 'Third title',
-      owner_id: users[1].id,
+      owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 3
     }
   ]
 }
@@ -80,7 +80,7 @@ function makeProfilesArray(users, templates) {
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 1
     },
     {
       id: '21223390-6fdf-4e3c-b85a-a697109e0b2d',
@@ -89,16 +89,16 @@ function makeProfilesArray(users, templates) {
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 2
     },
     {
       id: '690a4d5c-52e9-4512-91c9-6ad50641d8e5',
       title: 'Profile 3',
-      template_id: templates[1].id,
+      template_id: templates[0].id,
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 3
     },
     {
       id: 'a4758f24-bf74-479c-a476-746518584af0',
@@ -107,16 +107,16 @@ function makeProfilesArray(users, templates) {
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 4
     },
     {
-      id: 'a4758f24-bf74-479c-a476-746518584af0',
+      id: 'd0ab36d1-5e28-4b1c-8301-55ca041fb98d',
       title: 'Profile 5',
-      template_id: templates[2].id,
-      owner_id: users[1].id,
+      template_id: templates[0].id,
+      owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 5
     }
   ]
 }
@@ -133,7 +133,7 @@ function makeStampsArray(users, templates, profiles) {
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 1
     },
     {
       id: '0072a5de-4c20-45c5-bae4-179dca8a8930',
@@ -145,7 +145,7 @@ function makeStampsArray(users, templates, profiles) {
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 2
     },
     {
       id: '',
@@ -157,7 +157,7 @@ function makeStampsArray(users, templates, profiles) {
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 3
     },
     {
       id: '0072a5de-4c20-45c5-bae4-179dca8a8930',
@@ -165,11 +165,11 @@ function makeStampsArray(users, templates, profiles) {
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
-      profile_id: profiles[1].id,
+      profile_id: profiles[0].id,
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 4
     },
     {
       id: '59b9b9ee-03cf-4d95-80e6-09f3c96c2c22',
@@ -177,11 +177,11 @@ function makeStampsArray(users, templates, profiles) {
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
-      profile_id: profiles[2].id,
+      profile_id: profiles[0].id,
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 5
     },
     {
       id: 'd9b8b3c0-57ed-4407-949f-c4e1580cb3df',
@@ -189,11 +189,11 @@ function makeStampsArray(users, templates, profiles) {
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
-      profile_id: profiles[2].id,
+      profile_id: profiles[0].id,
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 6
     },
     {
       id: 'ecb17cb1-9194-4304-8753-cad6de279039',
@@ -201,11 +201,11 @@ function makeStampsArray(users, templates, profiles) {
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
-      profile_id: profiles[3].id,
+      profile_id: profiles[0].id,
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 7
     },
     {
       id: '83356bc8-9d17-4166-a819-77529b8eda73',
@@ -213,23 +213,23 @@ function makeStampsArray(users, templates, profiles) {
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
       template_id: templates[0].id,
-      profile_id: profiles[3].id,
+      profile_id: profiles[0].id,
       owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 8
     },
     {
       id: '19a13ca9-3e6a-4c4b-8037-2511e6c8d423',
       title: 'Stamp 9',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
-      template_id: templates[2].id,
-      profile_id: profiles[4].id,
-      owner_id: users[1].id,
+      template_id: templates[0].id,
+      profile_id: profiles[0].id,
+      owner_id: users[0].id,
       archived: '',
       write: '',
-      disp_ord: ''
+      disp_ord: 9
     }
   ]
 }
