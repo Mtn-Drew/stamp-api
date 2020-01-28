@@ -17,27 +17,6 @@ function makeUsersArray() {
       email: 'email@email.com',
       password: '11AAaa!!',
       date_created: new Date('2029-01-22T16:28:32.615Z')
-    },
-    {
-      id: '69060492-5f7f-48c5-97ab-81ce4716b172',
-      user_name: 'test-user-2',
-      email: 'email@email.com',
-      password: 'password',
-      date_created: new Date('2029-01-22T16:28:32.615Z')
-    },
-    {
-      id: '77a85732-28f8-41ee-a420-477cc3b69260',
-      user_name: 'test-user-3',
-      email: 'email@email.com',
-      password: 'password',
-      date_created: new Date('2029-01-22T16:28:32.615Z')
-    },
-    {
-      id: 'ec67c643-2cf4-4a4c-aa55-cb805c3066ba',
-      user_name: 'test-user-4',
-      email: 'email@email.com',
-      password: 'password',
-      date_created: new Date('2029-01-22T16:28:32.615Z')
     }
   ]
 }
@@ -51,22 +30,6 @@ function makeTemplatesArray(users) {
       archived: '',
       write: '',
       disp_ord: 1
-    },
-    {
-      id: 'c0cc8ec3-8ae7-440e-80bc-e6f35235176c',
-      title: 'Second title',
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 2
-    },
-    {
-      id: '14d17924-f028-4584-92bb-2691ef24580a',
-      title: 'Third title',
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 3
     }
   ]
 }
@@ -81,42 +44,6 @@ function makeProfilesArray(users, templates) {
       archived: '',
       write: '',
       disp_ord: 1
-    },
-    {
-      id: '21223390-6fdf-4e3c-b85a-a697109e0b2d',
-      title: 'Profile 2',
-      template_id: templates[0].id,
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 2
-    },
-    {
-      id: '690a4d5c-52e9-4512-91c9-6ad50641d8e5',
-      title: 'Profile 3',
-      template_id: templates[0].id,
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 3
-    },
-    {
-      id: 'a4758f24-bf74-479c-a476-746518584af0',
-      title: 'Profile 4',
-      template_id: templates[0].id,
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 4
-    },
-    {
-      id: 'd0ab36d1-5e28-4b1c-8301-55ca041fb98d',
-      title: 'Profile 5',
-      template_id: templates[0].id,
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 5
     }
   ]
 }
@@ -134,102 +61,6 @@ function makeStampsArray(users, templates, profiles) {
       archived: '',
       write: '',
       disp_ord: 1
-    },
-    {
-      id: '0072a5de-4c20-45c5-bae4-179dca8a8930',
-      title: 'Stamp 2',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
-      template_id: templates[0].id,
-      profile_id: profiles[0].id,
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 2
-    },
-    {
-      id: '',
-      title: 'Stamp 3',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
-      template_id: templates[0].id,
-      profile_id: profiles[1].id,
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 3
-    },
-    {
-      id: '0072a5de-4c20-45c5-bae4-179dca8a8930',
-      title: 'Stamp 4',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
-      template_id: templates[0].id,
-      profile_id: profiles[0].id,
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 4
-    },
-    {
-      id: '59b9b9ee-03cf-4d95-80e6-09f3c96c2c22',
-      title: 'Stamp 5',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
-      template_id: templates[0].id,
-      profile_id: profiles[0].id,
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 5
-    },
-    {
-      id: 'd9b8b3c0-57ed-4407-949f-c4e1580cb3df',
-      title: 'Stamp 6',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
-      template_id: templates[0].id,
-      profile_id: profiles[0].id,
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 6
-    },
-    {
-      id: 'ecb17cb1-9194-4304-8753-cad6de279039',
-      title: 'Stamp 7',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
-      template_id: templates[0].id,
-      profile_id: profiles[0].id,
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 7
-    },
-    {
-      id: '83356bc8-9d17-4166-a819-77529b8eda73',
-      title: 'Stamp 8',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
-      template_id: templates[0].id,
-      profile_id: profiles[0].id,
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 8
-    },
-    {
-      id: '19a13ca9-3e6a-4c4b-8037-2511e6c8d423',
-      title: 'Stamp 9',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, quas?',
-      template_id: templates[0].id,
-      profile_id: profiles[0].id,
-      owner_id: users[0].id,
-      archived: '',
-      write: '',
-      disp_ord: 9
     }
   ]
 }
@@ -268,16 +99,15 @@ function seedTemplatesTables(db, users, templates) {
   return db.transaction(async (trx) => {
     await seedUsers(trx, users)
     await trx.into('templates').insert(templates)
-    // update the auto sequence to match the forced id values
   })
 }
 
-function seedProfilesTables(db, users, profiles) {
+function seedProfilesTables(db, users, templates, profiles) {
   // use a transaction to group the queries and auto rollback on any failure
   return db.transaction(async (trx) => {
     await seedUsers(trx, users)
+    await seedTemplatesTables(trx, templates)
     await trx.into('profiles').insert(profiles)
-    // update the auto sequence to match the forced id values
   })
 }
 
@@ -286,9 +116,34 @@ function seedStampsTables(db, users, stamps) {
   return db.transaction(async (trx) => {
     await seedUsers(trx, users)
     await trx.into('stamps').insert(stamps)
-    // update the auto sequence to match the forced id values
   })
 }
+
+// function makeExpectedTemplates(users) {
+//   const author = users
+//     .find(user => user.id === template.owner_id)
+
+//   const number_of_templates = templates
+//     .filter(template => comment.article_id === article.id)
+//     .length
+
+//   return {
+//     id: article.id,
+//     style: article.style,
+//     title: article.title,
+//     content: article.content,
+//     date_created: article.date_created.toISOString(),
+//     number_of_comments,
+//     author: {
+//       id: author.id,
+//       user_name: author.user_name,
+//       full_name: author.full_name,
+//       nickname: author.nickname,
+//       date_created: author.date_created.toISOString(),
+//       date_modified: author.date_modified || null,
+//     },
+//   }
+// }
 
 module.exports = {
   makeUsersArray,
