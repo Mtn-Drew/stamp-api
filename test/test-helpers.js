@@ -27,8 +27,8 @@ function makeTemplatesArray(users) {
       id: 'c5d5b2f3-4b3f-47a0-8563-4606e2c8b559',
       title: 'First title',
       owner_id: users[0].id,
-      archived: '',
-      write: '',
+      // archived: '',
+      // write: '',
       disp_ord: 1
     }
   ]
@@ -41,8 +41,8 @@ function makeProfilesArray(users, templates) {
       title: 'Profile 1',
       template_id: templates[0].id,
       owner_id: users[0].id,
-      archived: '',
-      write: '',
+      // archived: '',
+      // write: '',
       disp_ord: 1
     }
   ]
@@ -105,8 +105,8 @@ function seedTemplatesTables(db, users, templates) {
 function seedProfilesTables(db, users, templates, profiles) {
   // use a transaction to group the queries and auto rollback on any failure
   return db.transaction(async (trx) => {
-    await seedUsers(trx, users)
-    await seedTemplatesTables(trx, templates)
+     await seedUsers(trx, users)
+     await seedTemplatesTables(trx, templates)
     await trx.into('profiles').insert(profiles)
   })
 }

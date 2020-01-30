@@ -25,20 +25,22 @@ describe('Profiles Endpoints', function() {
     context(`Given no profiles`, () => {
       it(`responds with 200 and an empty list`, () => {
         return supertest(app)
-        
           .get('/api/profiles')
           .expect(200, [])
       })
     })
 
     context('Given there are profiles in the database', () => {
+      console.log('users', testUsers)
+      console.log('templates', testTemplates)
+      console.log('profiles', testProfiles)
       beforeEach('insert profiles', () =>
-        helpers.seedProfilesTables(db, testUsers, testTemplates,testProfiles)
+        helpers.seedProfilesTables(db, testUsers, testTemplates, testProfiles)
       )
 
       it('responds with 200 and all of the profiles', () => {
-        const expectedProfiles = 
-         testProfiles.map((profile) =>(true))
+        const expectedProfiles = [testProfiles]
+        // testProfiles.map((profile) => true)
         //   helpers.makeExpectedProfile(testUsers, profile)
         // )
         return supertest(app)
@@ -83,3 +85,4 @@ describe('Profiles Endpoints', function() {
     })
   })
 })
+ 
