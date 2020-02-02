@@ -21,7 +21,7 @@ app.use(cors())
 app.use(helmet())
 
 
-//validate bearer
+
 app.use('/api/auth', authRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/templates', templatesRouter)
