@@ -2,7 +2,7 @@ const defaultLoad = {
   template: [
     
     {
-      title: 'MY FIRST TEMPLATE',
+      title: 'MY CUSTOM TEMPLATE',
     }
   ],
 

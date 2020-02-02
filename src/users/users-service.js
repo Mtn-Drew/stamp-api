@@ -57,7 +57,7 @@ const UsersService = {
       })
     })
   },
-  defaultPopulateProfile(db, user){
+  defaultPopulateProfile(db, user,){
     return defaultLoad.profile.map(profile => {
       console.log(profile, user.id);
       return db('profiles').insert({
@@ -66,6 +66,36 @@ const UsersService = {
       })
     })
   },
+  defaultPopulateStamp(db, user){
+    return defaultLoad.profile.map(profile => {
+      console.log(profile, user.id);
+      return db('profiles').insert({
+        ...profile, 
+        owner_id: user.id,
+      })
+    })
+  },
+
+  // defaultPopulateProfile(db, user, template_id){
+  //   return defaultLoad.profile.map(profile => {
+  //     console.log(profile, user.id);
+  //     return db('profiles').insert({
+  //       ...profile, 
+  //       owner_id: user.id,
+  //     })
+  //   })
+  // },
+  // defaultPopulateStamp(db, user, profile_id){
+  //   return defaultLoad.profile.map(profile => {
+  //     console.log(profile, user.id);
+  //     return db('profiles').insert({
+  //       ...profile, 
+  //       owner_id: user.id,
+  //     })
+  //   })
+  // },
+
+
 }
  
 module.exports = UsersService
