@@ -1,0 +1,2 @@
+ALTER TABLE templates 
+ALTER COLUMN disp_ord SET DATA TYPE INTEGER;

@@ -1,0 +1,2 @@
+ALTER TABLE profiles 
+ALTER COLUMN disp_ord SET DATA TYPE SERIAL;
