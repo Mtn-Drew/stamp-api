@@ -17,7 +17,9 @@ app.use(
     skip: () => NODE_ENV === 'test'
   })
 )
-app.use(cors())
+app.use(cors({
+  origin : process.env.CLIENT_ORIGIN
+}))
 app.use(helmet())
 
 
