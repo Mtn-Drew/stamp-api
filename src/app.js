@@ -8,6 +8,7 @@ const usersRouter = require('./users/users-router')
 const templatesRouter = require('./templates/templates-router')
 const profilesRouter = require('./profiles/profiles-router')
 const stampsRouter = require('./stamps/stamps-router')
+const sharesRouter = require('./shares/shares-router')
 
 
 const app = express()
@@ -17,9 +18,9 @@ app.use(
     skip: () => NODE_ENV === 'test'
   })
 )
-// app.use(cors({
-//   origin : process.env.CLIENT_ORIGIN
-// }))
+app.use(cors({
+  origin : process.env.CLIENT_ORIGIN
+}))
 app.use(cors())
 
 app.use(helmet())
@@ -31,6 +32,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/templates', templatesRouter)
 app.use('/api/profiles', profilesRouter)
 app.use('/api/stamps', stampsRouter)
+app.use('/api/shares', sharesRouter)
 
 
 
