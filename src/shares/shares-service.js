@@ -2,7 +2,7 @@ const SharesService = {
   getAllShares(knex, userid) {
     return knex
       .select('*')
-      .from('shares')
+      .from('shared_templates')
       .where('user_id', userid)
   },
   getAllTemplates(knex, template_id) {
