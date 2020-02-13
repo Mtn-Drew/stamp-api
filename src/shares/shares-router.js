@@ -9,10 +9,7 @@ const sharesRouter = express.Router()
 
 const sanatizeShare = (share) => ({
   id: share.id,
-  // title: xss(share.template_title),
-  // desc: share.template_desc,
   user: share.user_id,
-  // write: share.write,
   template_id: share.template_id
 })
 
@@ -38,64 +35,26 @@ sharesRouter
       .catch(next)
   })
 
-//get the shared template by id  
-// sharesRouter
-//   .use(requireAuth)
-//   .route('/templates')
-//     .get((req, res, next) => {
-//     console.log('share/templates')
-//     // SharesService.getAllTemplates(req.app.get('db'), req.user.id)
-//     SharesService.getAllTemplates(req.app.get('db'), template_id)
-//     .then(res.json())
-//     console.log('sharesRouter/templates', res.json()).catch(next)
-//   })
-
-
 
 //get template that was on the shared table
 sharesRouter
-  .use(requireAuth)
   .route('/templates/:template_id')
   .all(requireAuth)
   .all(checkTemplateExists)
-  .get((req, res, next) => {
+  
+  .get((req, res) => {
+     SharesService.getAllTemplates(req.app.get('db'), req.params)
+    console.log('req.params->',req.params)
+    
     res.json(sanatizeTemplate(res.template))
+    console.log('res.template ', res.template);
+ 
   })
-  // .delete((req, res, next) => {
-  //   TemplatesService.deleteTemplate(req.app.get('db'), req.params.template_id)
-  //     .then(() => {
-  //       res.status(204).end()
-  //     })
-  //     .catch(next)
-  // })
 
-  // .patch(jsonParser, (req, res, next) => {
-  //   const { title, owner } = req.body
-  //   const templateToUpdate = { title, owner }
-
-  //   const numberOfValues = Object.values(templateToUpdate).filter(Boolean)
-  //     .length
-  //   if (numberOfValues === 0) {
-  //     return res.status(400).json({
-  //       error: {
-  //         message: `Request body must contain 'title'`
-  //       }
-  //     })
-  //   }
-  //   TemplatesService.updateTemplate(
-  //     req.app.get('db'),
-  //     req.params.template_id,
-  //     templateToUpdate
-  //   )
-  //     .then((numRowsAffected) => {
-  //       res.status(204).end()
-  //     })
-  //     .catch(next)
-  // })
 
 async function checkTemplateExists(req, res, next) {
   try {
-    const template = await TemplatesService.getById(
+    const template = await SharesService.getById(
       req.app.get('db'),
       req.params.template_id
     )
@@ -110,9 +69,7 @@ async function checkTemplateExists(req, res, next) {
   } catch (error) {
     next(error)
   }
-
 }
-
 
 sharesRouter
   .use(requireAuth)
@@ -130,7 +87,7 @@ sharesRouter
   .use(requireAuth)
   .route('/stamps')
   .get((req, res, next) => {
-    SharesService.getAllProfiles(req.app.get('db'), template_id)
+    SharesService.getAllStamps(req.app.get('db'), template_id)
       // .then((profile) => {
       //   res.json(profile.map(sanitizeProfile))
       // })

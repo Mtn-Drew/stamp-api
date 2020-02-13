@@ -9,7 +9,8 @@ const SharesService = {
     return knex
       .select('*')
       .from('templates')
-      .where('template_id', template_id)
+      .where('id', template_id)
+      .first()
   },
   //use templateId instead of ownerId
   getAllProfiles(knex, template_id) {
@@ -34,7 +35,7 @@ const SharesService = {
   getById(knex, id) {
     return knex
       .select('*')
-      .from('shares')
+      .from('templates')// will need a variable here
       .where('id', id)
       .first()
   },
