@@ -39,6 +39,15 @@ const SharesService = {
       .where('id', id)
       .first()
   },
+
+  getProfileByTemplateId(knex, template_id) {
+    return knex
+      .select('*')
+      .from('profiles')
+      .where('template_id', template_id)
+  },
+
+  
   //need to determine share id
   deleteShare(knex, id) {
     return knex('shares')

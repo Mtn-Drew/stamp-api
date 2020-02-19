@@ -22,6 +22,28 @@ const sanatizeTemplate = (template) => ({
   disp_ord: template.disp_ord
 })
 
+const sanitizeProfile = (profile) => ({
+  id: profile.id,
+  title: xss(profile.title),
+  template_id: profile.template_id,
+  owner_id: profile.owner_id,
+  archived: profile.archived,
+  write: profile.write,
+  disp_ord: profile.disp_ord
+})
+
+const sanitizeStamp = (stamp) =>({
+  id: stamp.id,
+  title: stamp.title,
+  content: stamp.content,
+  template_id: stamp.template_id,
+  profile_id: stamp.profile_id,
+  owner_id: stamp.owner_id,
+  archived: stamp.archived,
+  write: stamp.write,
+  disp_ord: stamp.disp_ord
+})
+
 //check the shares table for user
 sharesRouter
   .use(requireAuth)
@@ -35,22 +57,20 @@ sharesRouter
       .catch(next)
   })
 
-
 //get template that was on the shared table
 sharesRouter
   .route('/templates/:template_id')
   .all(requireAuth)
   .all(checkTemplateExists)
-  
-  .get((req, res) => {
-     SharesService.getAllTemplates(req.app.get('db'), req.params)
-    console.log('req.params->',req.params)
-    
-    res.json(sanatizeTemplate(res.template))
-    console.log('res.template ', res.template);
- 
-  })
 
+  .get((req, res) => {
+    SharesService.getAllTemplates(req.app.get('db'), req.params)
+    console.log('template req.params->', req.params)
+
+    res.json(sanatizeTemplate(res.template))
+    console.log('res.template ', res.template)
+   
+  })
 
 async function checkTemplateExists(req, res, next) {
   try {
@@ -71,16 +91,54 @@ async function checkTemplateExists(req, res, next) {
   }
 }
 
+async function checkProfileExists(req, res, next) {
+  try {
+    const profile = await SharesService.getProfileByTemplateId(
+      req.app.get('db'),
+      req.params.template_id
+    )
+console.log('req.params.template_id ->', req.params.template_id)
+    if (!profile)
+      return res.status(404).json({
+        error: `Profile doesn't exist`
+      })
+
+    res.profile = profile
+    console.log('checkProfileExists ->', profile)
+    next()
+  } catch (error) {
+    next(error)
+  }
+}
+
 sharesRouter
-  .use(requireAuth)
-  .route('/profiles')
+  .route('/profiles/:template_id')
+  .all(requireAuth)
+  //.all(checkProfileExists)
+
   .get((req, res, next) => {
-    SharesService.getAllProfiles(req.app.get('db'), template_id)
-      // .then((profile) => {
-      //   res.json(profile.map(sanitizeProfile))
-      // })
-      .then(res.json())
-      .catch(next)
+    console.log('get-profiles/tmp_id ', req.params.template_id)
+    console.log('req.user.id ', req.user.id);
+    SharesService.getAllProfiles(req.app.get('db'), req.params.template_id)
+   
+    .then((profile)=>{
+      console.log('profile--', profile)
+      console.log('res.profile', res.profile)
+      res.json(profile.map(sanitizeProfile))
+      //returnArray = profile.map(sanitizeProfile)
+      //returnArray.forEach(res.json())
+    })
+    .catch(next)
+
+    // .then((profile)=>{
+    //   console.log('profile--', profile)
+    //   res.json(profile.map(sanatizeProfile,i))
+    // })
+    // .catch(next)
+
+    // res.json(sanatizeProfile(res.profile[0]))
+    // console.log('res.profile=>', res.profile)
+
   })
 
 sharesRouter
