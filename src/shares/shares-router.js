@@ -7,13 +7,13 @@ const { requireAuth } = require('../middleware/jwt-auth.js')
 const sharesRouter = express.Router()
 //const jsonParser = express.json()
 
-const sanatizeShare = (share) => ({
+const sanitizeShare = (share) => ({
   id: share.id,
   user: share.user_id,
   template_id: share.template_id
 })
 
-const sanatizeTemplate = (template) => ({
+const sanitizeTemplate = (template) => ({
   id: template.id,
   title: xss(template.title),
   owner: template.owner_id,
@@ -52,7 +52,7 @@ sharesRouter
     console.log('sharesRouter/', req.user.id)
     SharesService.getAllShares(req.app.get('db'), req.user.id)
       .then((share) => {
-        res.json(share.map(sanatizeShare))
+        res.json(share.map(sanitizeShare))
       })
       .catch(next)
   })
@@ -67,7 +67,7 @@ sharesRouter
     SharesService.getAllTemplates(req.app.get('db'), req.params)
     console.log('template req.params->', req.params)
 
-    res.json(sanatizeTemplate(res.template))
+    res.json(sanitizeTemplate(res.template))
     console.log('res.template ', res.template)
    
   })
@@ -91,65 +91,53 @@ async function checkTemplateExists(req, res, next) {
   }
 }
 
-async function checkProfileExists(req, res, next) {
-  try {
-    const profile = await SharesService.getProfileByTemplateId(
-      req.app.get('db'),
-      req.params.template_id
-    )
-console.log('req.params.template_id ->', req.params.template_id)
-    if (!profile)
-      return res.status(404).json({
-        error: `Profile doesn't exist`
-      })
+// async function checkProfileExists(req, res, next) {
+//   try {
+//     const profile = await SharesService.getProfileByTemplateId(
+//       req.app.get('db'),
+//       req.params.template_id
+//     )
+// console.log('req.params.template_id ->', req.params.template_id)
+//     if (!profile)
+//       return res.status(404).json({
+//         error: `Profile doesn't exist`
+//       })
 
-    res.profile = profile
-    console.log('checkProfileExists ->', profile)
-    next()
-  } catch (error) {
-    next(error)
-  }
-}
+//     res.profile = profile
+//     console.log('checkProfileExists ->', profile)
+//     next()
+//   } catch (error) {
+//     next(error)
+//   }
+// }
 
 sharesRouter
   .route('/profiles/:template_id')
   .all(requireAuth)
-  //.all(checkProfileExists)
-
   .get((req, res, next) => {
-    console.log('get-profiles/tmp_id ', req.params.template_id)
-    console.log('req.user.id ', req.user.id);
+    // console.log('get-profiles/tmp_id ', req.params.template_id)
+    // console.log('req.user.id ', req.user.id)
     SharesService.getAllProfiles(req.app.get('db'), req.params.template_id)
    
     .then((profile)=>{
-      console.log('profile--', profile)
-      console.log('res.profile', res.profile)
+      // console.log('profile--', profile)
+      // console.log('res.profile', res.profile)
       res.json(profile.map(sanitizeProfile))
-      //returnArray = profile.map(sanitizeProfile)
-      //returnArray.forEach(res.json())
     })
     .catch(next)
-
-    // .then((profile)=>{
-    //   console.log('profile--', profile)
-    //   res.json(profile.map(sanatizeProfile,i))
-    // })
-    // .catch(next)
-
-    // res.json(sanatizeProfile(res.profile[0]))
-    // console.log('res.profile=>', res.profile)
 
   })
 
 sharesRouter
-  .use(requireAuth)
-  .route('/stamps')
+  
+  .route('/stamps/:template_id')
+  .all(requireAuth)
   .get((req, res, next) => {
-    SharesService.getAllStamps(req.app.get('db'), template_id)
-      // .then((profile) => {
-      //   res.json(profile.map(sanitizeProfile))
-      // })
-      .then(res.json())
+    SharesService.getAllStamps(req.app.get('db'), req.params.template_id)
+
+      .then((stamp)=>{
+        res.json(stamp.map(sanitizeStamp))
+      })
       .catch(next)
   })
 
