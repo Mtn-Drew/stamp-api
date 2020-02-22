@@ -72,6 +72,14 @@ sharesRouter
    
   })
 
+  .delete((req, res, next) => {
+    SharesService.deleteShare(req.app.get('db'), req.params.template_id)
+      .then(() => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
+
 async function checkTemplateExists(req, res, next) {
   try {
     const template = await SharesService.getById(
@@ -124,6 +132,7 @@ sharesRouter
       // console.log('res.profile', res.profile)
       res.json(profile.map(sanitizeProfile))
     })
+
     .catch(next)
 
   })

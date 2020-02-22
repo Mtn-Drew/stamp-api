@@ -49,9 +49,9 @@ const SharesService = {
 
   
   //need to determine share id
-  deleteShare(knex, id) {
-    return knex('shares')
-      .where({ id })
+  deleteShare(knex, template_id) {
+    return knex('shared_templates')
+      .where({ template_id })
       .delete()
   }
 
