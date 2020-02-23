@@ -9,6 +9,7 @@ const templatesRouter = require('./templates/templates-router')
 const profilesRouter = require('./profiles/profiles-router')
 const stampsRouter = require('./stamps/stamps-router')
 const sharesRouter = require('./shares/shares-router')
+const shareablesRouter = require('./shareables/shareables-router')
 
 
 const app = express()
@@ -33,6 +34,7 @@ app.use('/api/templates', templatesRouter)
 app.use('/api/profiles', profilesRouter)
 app.use('/api/stamps', stampsRouter)
 app.use('/api/shares', sharesRouter)
+app.use('/api/shareables', shareablesRouter)
 
 
 
