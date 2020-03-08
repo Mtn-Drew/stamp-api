@@ -51,7 +51,7 @@ templatesRouter
       })
       .catch(next)
   })
-
+ 
 templatesRouter
   .use(requireAuth)
   .route('/:template_id')
