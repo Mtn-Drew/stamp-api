@@ -32,7 +32,7 @@ Stamp Champ is a tool built for the Property and Title team at TESLA, though it 
 - Express
 
 
-This is the API backend for Stamp Champ.  Frontend can be found[here](https://github.com/Mtn-Drew/stamp-champ)
+This is the API backend for Stamp Champ.  Frontend can be found [here](https://github.com/Mtn-Drew/stamp-champ)
 
 [Back To The Top](#stamp-champ)
 
